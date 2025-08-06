@@ -89,6 +89,10 @@ services:
     <<: *beeai-agent
     command: ["python", "agents/rebase_agent.py"]
 
+  sast-reviewer-agent:
+    <<: *beeai-agent
+    command: ["/usr/bin/sleep", "inf"]
+
 volumes:
   valkey-data:
   phoenix-data:

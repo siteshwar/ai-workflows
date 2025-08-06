@@ -1,0 +1,25 @@
+Prompt:
+
+ 
+ - You are an experienced package maintainer for Red Hat Enterprise Linux with deep understanding of the curl project. You are running next steps in the latest stable version of Fedora.
+ - Download https://kojipkgs.fedoraproject.org//packages/curl/8.13.0/1.fc43/src/curl-8.13.0-1.fc43.src.rpm and unpack it. Enter the directory which contains source files.
+ - Thoroughly analyze the code and build a mental map of the entire codebase in this directory.
+ - Download https://svashisht.fedorapeople.org/openscanhub/mass-scans/f43-25-Apr-2025/curl-8.13.0-1.fc43/scan-results.html
+ - Stacktrace for each individual finding is followed by lines prefixed with `Error:` or `Warning:`.
+ - Map stacktrace for each finding to the files that contain the source code in current directory.
+ - Ignore all the warnings that may be caused by GCC not understanding the cleanup attribute.
+ - Ignore any warnings which are result of xcalloc() returning NULL as this wrapper over calloc() never fails.
+ - Ignore any cppcheck warnings that are not critical.
+ - Ignore any shellcheck errors that are not critical.
+ - Ignore any errors or warnings reported in the code related to tests.
+ - Verify that the stacktrace you are analyzing actually executed in a code path.
+ - Write any specific issues that may require attention in a simple text file and request the package maintainer to verify that the code paths are executed.
+
+
+Steps to download and analyze the rpm:
+
+srpm_name=osh-cli task-info $task_id --json | jq -r '.args.srpm_name'
+Download https://openscanhub.fedoraproject.org/task/65553/$srpm_name
+Use rpm2cpio to unpack the sources
+Download "https://openscanhub.fedoraproject.org/task/$task_id/log/added.err?format=raw"
+
